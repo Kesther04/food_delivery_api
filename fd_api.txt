@@ -1,0 +1,20 @@
+npm install dotenv
+
+IMPORTANT DIRECTORIES FOR ANY BACKEND APP
+* config dir - for environment specific setup files that configures how my app connects to external services
+* utils dir - for keeping helper function reusable to multiple files in my app
+* services dir - for doing the work required in the application at a certain level.( such as calculations or talking to db or sending emails) (this keeps controllers light)
+* tests dir - for storing automated tests for the app (this is vital so that old features won't be broken due to new changes)
+* controllers dir - handles request/response logic & call services for models
+* models dir - defines the structure of a db doc and allows CRUD methods
+* middlewares dir - functions that run b4 / after reaching controllers
+* routes dir - define the API endpoints (URLs + HTTP mtds) & map them to controllers
+
+
+Client 
+  |
+Server                     < - - - - -  -                      < - - - - - -                                Route
+  |                                                                                                           |
+Route -> Middleware(task dependent) -> Controller -> Model -> Controller -> Middleware(task dependent) ->  response 
+                                            |                     |
+                                        (preps req.)          (preps res.)
