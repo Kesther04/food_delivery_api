@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/UserRoutes.js";
+import restaurantRoutes from "./routes/RestaurantRoutes.js";
+import dishRoutes from "./routes/DishRoutes.js";
 
 // Load env vars
 dotenv.config();
@@ -18,7 +20,9 @@ app.use(express.json()); // parse JSON
 
 // Routes
 app.get("/", (req, res) => res.send("Welcome to the SavorySwift API"));
-app.use("/users", userRoutes);
+app.use("/users", userRoutes); // for all user routes
+app.use("/restaurants",restaurantRoutes); // for all restaurant routes
+app.use("/dish",dishRoutes); // for all dish routes
 
 // Error handler middleware (catch all)
 app.use((err, req, res, next) => {

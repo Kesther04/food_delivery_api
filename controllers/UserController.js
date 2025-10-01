@@ -29,13 +29,14 @@ export const checkUser = async (req, res) => {
 
 // for creating user on signup
 export const createUser = async (req, res) => {
-    const { name, email, password } = req.body;
+    const userData = req.body;
+    const { email } = req.body;
     try {
         const existingUser = await User.findOne({ email });
         // to check if user already exists
         if (existingUser) throw new Error("User already exists");
 
-        const user = await User.create({ name, email, password });
+        const user = await User.create(userData);
 
         // Generate token
         const token = jwt.sign(
