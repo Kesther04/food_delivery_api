@@ -64,5 +64,18 @@ export async function updateRestaurant(restaurantId, data) {
 export async function getAllDishes(){
   const dishes = await Dish.find().lean();
   if (!dishes) throw new Error("Dishes not found");
+  await Promise.all(
+  dishes.map(async (dish) => {
+    const restaurantData = await Restaurant.findById(dish.restaurantId).lean();
+    if (!restaurantData) throw new Error(`Restaurant Data not found for ${dish.name}`);
+
+    dish.restaurantName = restaurantData.name;
+    dish.address = restaurantData.address;
+    dish.rating = restaurantData.rating;
+    dish.review = restaurantData.reviewCount;
+  })
+  
+  );
+
   return dishes;
 }
