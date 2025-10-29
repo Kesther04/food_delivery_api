@@ -35,6 +35,7 @@ export async function readDish(dishId){
   
   restaurant.restaurantName = restaurant.name;
   delete restaurant.name;
+  delete restaurant._id;
   return {...dish, ...restaurant};
 }
 

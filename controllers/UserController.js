@@ -58,13 +58,29 @@ export const currentUser = async (req,res) => {
     res.status(200).json(user);
 }
 
-// for updating user favorites 
-export const userFavorites = async (req,res) => {
-    const { favorite } = req.body;
-    try {
-        const users = await User.findByIdAndUpdate({ favorite });
-        res.status(204).json({message: err.message});
-    } catch (err) {
-        res.status(400).json({message: err.message});
+// for getting favorite dishes of specific user
+export const userFavorites = async (req, res) => {
+  const { dishId } = req.body;
+
+  try {
+    // Get user (without password)
+    const user = await User.findById(req.user.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
-}
+
+    // Check if dish is already in favorites
+    let favorites = user.favorites.includes(dishId) ? user.favorites.filter((liked) => liked != dishId) : [...user.favorites, dishId];
+
+    // Update user favorites
+    user.favorites = favorites;
+    await user.save();
+
+    // Respond with updated favorites
+    res.status(200).json({ favorites: user.favorites });
+    
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};

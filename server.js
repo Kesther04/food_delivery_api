@@ -5,6 +5,7 @@ import connectDB from "./config/db.js";
 import userRoutes from "./routes/UserRoutes.js";
 import restaurantRoutes from "./routes/RestaurantRoutes.js";
 import dishRoutes from "./routes/DishRoutes.js";
+import cartRoutes from "./routes/CartRoutes.js";
 
 // Load env vars
 dotenv.config();
@@ -23,6 +24,7 @@ app.get("/", (req, res) => res.send("Welcome to the SavorySwift API"));
 app.use("/users", userRoutes); // for all user routes
 app.use("/restaurants",restaurantRoutes); // for all restaurant routes
 app.use("/dish",dishRoutes); // for all dish routes
+app.use("/cart",cartRoutes); // for all cart routes
 
 // Error handler middleware (catch all)
 app.use((err, req, res, next) => {
