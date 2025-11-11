@@ -6,6 +6,7 @@ import userRoutes from "./routes/UserRoutes.js";
 import restaurantRoutes from "./routes/RestaurantRoutes.js";
 import dishRoutes from "./routes/DishRoutes.js";
 import cartRoutes from "./routes/CartRoutes.js";
+import logger from "./middlewares/loggerMiddleware.js";
 
 // Load env vars
 dotenv.config();
@@ -18,6 +19,7 @@ const app = express();
 // Global Middlewares
 app.use(cors()); // allow frontend access
 app.use(express.json()); // parse JSON
+app.use(logger);
 
 // Routes
 app.get("/", (req, res) => res.send("Welcome to the SavorySwift API"));

@@ -20,7 +20,7 @@ export const checkUser = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
-        console.log({token});
+        // console.log({token});
         res.status(201).json({token});
     } catch (err) {
         res.status(400).json({ message: err.message});
