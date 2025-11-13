@@ -6,6 +6,7 @@ import userRoutes from "./routes/UserRoutes.js";
 import restaurantRoutes from "./routes/RestaurantRoutes.js";
 import dishRoutes from "./routes/DishRoutes.js";
 import cartRoutes from "./routes/CartRoutes.js";
+import orderRoutes from "./routes/OrderRoutes.js";
 import logger from "./middlewares/loggerMiddleware.js";
 
 // Load env vars
@@ -27,6 +28,7 @@ app.use("/users", userRoutes); // for all user routes
 app.use("/restaurants",restaurantRoutes); // for all restaurant routes
 app.use("/dish",dishRoutes); // for all dish routes
 app.use("/cart",cartRoutes); // for all cart routes
+app.use("/orders", orderRoutes); // for all order routes
 
 // Error handler middleware (catch all)
 app.use((err, req, res, next) => {
